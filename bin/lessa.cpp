@@ -5,11 +5,13 @@
 
 using namespace std;
 int main(void){
-    cout << "Lessa Compiler" << endl << endl;
-    string input = "foobar = 123";
+    cout << "Amrika Compiler" << endl << endl;
+    string input = "raayi enni numbers kavali theesko nums a = 0 b = 1 okavela nums > 0 ainappudu raayi a c = a + b a = b b = c nums = nums - 1.#fibonacci numbers generate cheshey code";
     Lexer lexer(input);
-    while(lexer.peek() != '\0'){
-        cout << lexer.curChar << endl;
-        lexer.nextChar();
+
+    Token token = lexer.getToken();
+    while(token.tokenKind != EOF_){
+        cout << token.tokenKind << " " << token.tokenText << endl;
+        token = lexer.getToken();
     }
 }
