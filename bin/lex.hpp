@@ -14,7 +14,8 @@ enum TokenType{
     okavela = 103,
     aithe = 104,
     ainappudu = 105,
-
+    anuko = 106,
+    
     EQ = 201,
     PLUS = 202,
     MINUS = 203,
@@ -25,7 +26,8 @@ enum TokenType{
     LT  = 208,
     LTEQ = 209,
     GT = 210,
-    GTEQ = 211
+    GTEQ = 211,
+    DOT = 212 
 };
 
 using namespace std;
@@ -48,6 +50,9 @@ class Lexer{
         int curPos;
         map<string, TokenType> keywords;
 
+        Lexer(){
+            
+        }
         Lexer(string input);
 
         //process next character

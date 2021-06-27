@@ -16,7 +16,8 @@ Lexer::Lexer(string input){
     keywords.insert({"okavela", okavela});
     keywords.insert({"aithe", aithe});
     keywords.insert({"ainappudu", ainappudu});
-    
+    keywords.insert({"anuko", anuko});
+
     source = input + "\n";
     curChar = '.';
     curPos = -1;
@@ -67,7 +68,7 @@ void Lexer::skipComment(){
 Token Lexer::getToken(){
     skipWhiteSpace();
     skipComment();
-    Token token("", EOF_);
+    Token token;
 //Check the first character of this token to decide what it is.
 //If it is a multiple character operator, number, identifier, or a keyword then we will process the rest.
     if(curChar == '+'){//Plus token
@@ -161,7 +162,7 @@ Token Lexer::getToken(){
                 nextChar();
             }
         }
-        string tokText = source.substr(startPos, curPos-startPos+2);
+        string tokText = source.substr(startPos, curPos-startPos+1);
         token = Token(tokText, NUMBER);
     }
 
@@ -182,6 +183,10 @@ Token Lexer::getToken(){
         else{
             token = Token(tokText, IDENT);
         }
+    }
+
+    else if(curChar == '.'){//Dot token
+        token = Token(ctos(curChar), DOT);
     }
 
     else if(curChar == '\n'){//newline token
