@@ -30,4 +30,5 @@ g++ lessa.cpp lex.cpp parse.cpp && a
 <li>identifier la only english letters undali. numbers, symbols undodhu.
 <li>numbers antae only floating point numbers. integers ki ikkada place ledhu.
 <li>okavela ends with a dot in a new line. same line lo end kavali. grammar reframe cheyali. will work on that the next time.
-</ul>assignment statements annitiki anuko prefix undalsindhe. idi kuda marchali. may be final statement ki specific ga marchali. will sit on this.
+<li>assignment statements annitiki anuko prefix undalsindhe. idi kuda marchali. may be final statement ki specific ga marchali. will sit on this.
+</ul>
