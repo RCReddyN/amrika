@@ -1,0 +1,14 @@
+rashey "enni numbers kavali?"
+theesko nums
+rashey " "
+
+anuko a = 0
+anuko b = 1
+
+okavela nums > 0 ainappudu
+	rashey a
+	anuko c = a + b
+	anuko a = b
+	anuko b = c
+	anuko nums = nums - 1
+.
