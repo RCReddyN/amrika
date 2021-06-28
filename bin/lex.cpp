@@ -17,7 +17,8 @@ Lexer::Lexer(string input){
     keywords.insert({"aithe", aithe});
     keywords.insert({"ainappudu", ainappudu});
     keywords.insert({"anuko", anuko});
-
+    keywords.insert({"chudu", chudu});
+    
     source = input + "\n";
     curChar = '.';
     curPos = -1;
@@ -141,7 +142,7 @@ Token Lexer::getToken(){
                 abort("ee string la unsupported character edho undi chusko."); 
             }
             nextChar();
-            string tokText = source.substr(startPos, curPos-startPos+1);
+            string tokText = source.substr(startPos, curPos-startPos);
             token = Token(tokText, STRING);
         }
     }

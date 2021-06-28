@@ -1,14 +1,19 @@
 #include<map>
 #include<set>
+
+#include "lex.hpp"
+#include "emit.hpp"
+
 class Parser{
     public:
         map<TokenType, string> tokens;
         Lexer lexer;
+        Emitter emitter;
         Token curToken;
         Token peekToken;
         set<string> symbols;
 
-        Parser(Lexer lexer);
+        Parser(Lexer tlexer, Emitter temitter);
 
         //return true if the current token matches
         bool checkToken(TokenType kind);

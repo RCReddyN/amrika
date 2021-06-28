@@ -15,6 +15,7 @@ enum TokenType{
     aithe = 104,
     ainappudu = 105,
     anuko = 106,
+    chudu = 107,
     
     EQ = 201,
     PLUS = 202,

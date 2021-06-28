@@ -1,11 +1,9 @@
 #include<iterator>
-#include<map>
-#include<set>
 #include<sstream>
-#include "lex.hpp"
+
 #include "parse.hpp"
 
-Parser::Parser(Lexer tlexer){
+Parser::Parser(Lexer tlexer, Emitter temitter){
     tokens.insert({EOF_, "EOF"});
     tokens.insert({NEWLINE, "NEWLINE"});
     tokens.insert({NUMBER, "NUMBER"});
@@ -18,6 +16,7 @@ Parser::Parser(Lexer tlexer){
     tokens.insert({aithe, "aithe"});
     tokens.insert({ainappudu, "ainappudu"});
     tokens.insert({anuko, "anuko"});
+    tokens.insert({chudu, "chudu"});
 
     tokens.insert({EQ, "EQ"});
     tokens.insert({PLUS, "PLUS"});
@@ -33,7 +32,8 @@ Parser::Parser(Lexer tlexer){
     tokens.insert({DOT, "DOT"});
     
     lexer = tlexer;
-    
+    emitter = temitter;
+
     nextToken();
     nextToken(); //called twice to initialize current and peek
 }
@@ -73,8 +73,9 @@ void Parser::abort(string message){
 }
 
 void Parser::program(){
-    cout << "PROGRAM" << endl;
-
+    emitter.headerLine("#include <stdio.h>");
+    emitter.headerLine("int main(void){");
+    
     //consume newlines in the begining
     while(checkToken(TokenType::NEWLINE)){
         nextToken();
@@ -84,74 +85,109 @@ void Parser::program(){
     while(!checkToken(TokenType::EOF_)){
         Parser::statement();
     }
+
+    emitter.emitLine("return 0;");
+    emitter.emitLine("}");
+    emitter.writeFile();
 }
 
 void Parser::statement(){
     //statement ::= "rashey" (expression | STRING) nl
     if(checkToken(TokenType::rashey)){
-        cout << "STATEMENT - rashey" << endl;
         nextToken();
 
         if (Parser::checkToken(TokenType::STRING)){
             //simple string
+            stringstream s;
+            s << "printf(\"";
+            s << curToken.tokenText;
+            s << "\\n\");";
+            emitter.emitLine(s.str());
             nextToken();
         }
         else{
             //expect an expression
+            stringstream s;
+            s << "printf(\"%";
+            s << ".7f\\n\", (float)(";
+            emitter.emit(s.str());
             expression();
+            emitter.emitLine("));");
         }
+    }
+
+    else if(checkToken(TokenType::chudu)){
+        nextToken();
+        emitter.emit("if(");
+        comparison();
+        
+        match(TokenType::aithe);
+        newline();
+        emitter.emitLine("){");
+        while(!checkToken(TokenType::DOT)){
+            statement();
+        }
+
+        match(TokenType::DOT);
+        emitter.emitLine("}");
     }
 
     else if(checkToken(TokenType::okavela)){
-        cout << "STATEMENT - okavela" << endl;
         nextToken();
+        emitter.emit("while(");
         comparison();
-        
-        if(checkToken(TokenType::aithe)){
-            cout << "STATEMENT - aithe" << endl;
-            match(TokenType::aithe);
-            newline();
-
-            while(!checkToken(TokenType::DOT)){
-                statement();
-            }
-
-            match(TokenType::DOT);
+    
+        match(TokenType::ainappudu);
+        newline();
+        emitter.emitLine("){");
+        while(!checkToken(TokenType::DOT)){
+            statement();
         }
-
-        else if(checkToken(TokenType::ainappudu)){
-            cout << "STATEMENT - ainappudu" << endl;
-            match(TokenType::ainappudu);
-            newline();
-
-            while(!checkToken(TokenType::DOT)){
-                statement();
-            }
-
-            match(TokenType::DOT);
-        }
+        match(TokenType::DOT);
+        emitter.emitLine("}");
     }
 
     else if(checkToken(TokenType::anuko)){
-        cout << "STATEMENT - anuko" << endl;
-
         nextToken();
 
         if(symbols.count(curToken.tokenText) == 0){
             symbols.insert(curToken.tokenText);
+            stringstream s;
+            s << "float ";
+            s << curToken.tokenText;
+            s << ";";
+            emitter.headerLine(s.str());
         }
-
+        emitter.emit(curToken.tokenText);
+        emitter.emit(" = ");
         match(TokenType::IDENT);
         match(TokenType::EQ);
         expression();
+        emitter.emitLine(";");
     }
 
     else if(checkToken(TokenType::theesko)){
-        cout << "SATEMENT - theesko" << endl;
         nextToken();
         if(symbols.count(curToken.tokenText) == 0){
             symbols.insert(curToken.tokenText);
+            stringstream s;
+            s << "float ";
+            s << curToken.tokenText;
+            s << ";";
+            emitter.headerLine(s.str());
         }
+        emitter.emit("if(0 == scanf(\"%");
+        emitter.emit("f\", &");
+        emitter.emit(curToken.tokenText);
+        emitter.emitLine(")) {");
+
+        emitter.emit(curToken.tokenText);
+        emitter.emitLine(" = 0;");
+
+        emitter.emit("scanf(\"%");
+        emitter.emitLine("*s\");");
+
+        emitter.emitLine("}");
         match(TokenType::IDENT);
     }
 
@@ -166,8 +202,6 @@ void Parser::statement(){
 }
 
 void Parser::newline(){
-    cout << "NEWLINE" << endl;
-
     //require at least one newline
     match(TokenType::NEWLINE);
 
@@ -178,18 +212,15 @@ void Parser::newline(){
 }
 
 void Parser::dot(){
-    cout << "DOT" << endl;
-
     match(TokenType::DOT);
 }
 
 void Parser::comparison(){
-    cout << "COMPARISON" << endl;
-
     expression();
 
     //must be at least one comparison operator and another expression
     if(isComparisonOperator()){
+        emitter.emit(curToken.tokenText);
         nextToken();
         expression();
     }
@@ -201,6 +232,7 @@ void Parser::comparison(){
     }
 
     while(isComparisonOperator()){
+        emitter.emit(curToken.tokenText);
         nextToken();
         expression();
     }
@@ -211,39 +243,35 @@ bool Parser::isComparisonOperator(){
 }
 
 void Parser::expression(){
-    cout << "EXPRESSION" << endl;
-
     term();
     while(checkToken(TokenType::PLUS) || checkToken(TokenType::MINUS)){
+        emitter.emit(curToken.tokenText);
         nextToken();
         term();
     }
 }
 
 void Parser::term(){
-    cout << "TERM" << endl;
-
     unary();
 
     while(checkToken(TokenType::ASTERISK) || checkToken(TokenType::SLASH)){
+        emitter.emit(curToken.tokenText);
         nextToken();
         unary();    
     }
 }
 
 void Parser::unary(){
-    cout << "UNARY" << endl;
-
     if(checkToken(TokenType::PLUS) || checkToken(TokenType::MINUS)){
+        emitter.emit(curToken.tokenText);
         nextToken();
     }
     primary();
 }
 
 void Parser::primary(){
-    cout << "PRIMARY (" << curToken.tokenText << ")" << endl;
-
     if(checkToken(TokenType::NUMBER)){
+        emitter.emit(curToken.tokenText);
         nextToken();
     }
     else if(checkToken(TokenType::IDENT)){
@@ -254,6 +282,7 @@ void Parser::primary(){
             s << curToken.tokenText;
             abort(s.str());    
         }
+        emitter.emit(curToken.tokenText);
         nextToken();
     }
     else{
