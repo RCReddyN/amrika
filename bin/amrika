@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo $(g++ lessa.cpp lex.cpp emit.cpp parse.cpp)
+
+echo $(./a.out $1)
