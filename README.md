@@ -7,7 +7,7 @@ ippatiki support aithe kinda kanipinche operations ki mathrame undi:
 - [x] basic arithmetic
 - [x] chudu - aithe statement
 - [x] anuko, theesko statements
-- [x] okavela - ainappudu loops
+- [x] okavela - ainappudu loop
 - [x] text and numbers print cheyadam
 - [x] comments
 - [ ] expressions ki parantheses
