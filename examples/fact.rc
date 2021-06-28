@@ -1,0 +1,7 @@
+theesko n
+anuko f = 1
+okavela n > 0 ainappudu
+    anuko f = f * n
+    anuko n = n - 1 
+.
+rashey f

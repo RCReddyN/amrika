@@ -7,8 +7,8 @@ ippatiki support aithe kinda kanipinche operations ki mathrame undi:
 - [x] basic arithmetic
 - [x] okavela - aithe statement
 - [x] okavela - ainappudu loops
-- [ ] text and numbers print cheyadam
-- [ ] numbers input read cheyadam
+- [x] text and numbers print cheyadam
+- [x] numbers input read cheyadam
 - [x] comments
 - [ ] expressions ki parantheses
 - [ ] logical operators
@@ -16,9 +16,6 @@ ippatiki support aithe kinda kanipinche operations ki mathrame undi:
 - [ ] bin, hex and octal numerics
 - [ ] compilation thappulu
 - [ ] panulu
-
-26-06-2021 - Lexical Analysis okkate ayindi. malla time unnappudu migithadi.
-28-06-2021 - Parser is done.
 
 ```
 g++ lessa.cpp lex.cpp parse.cpp && a

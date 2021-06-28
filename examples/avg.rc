@@ -1,0 +1,20 @@
+anuko a = 0
+
+okavela a < 1 ainappudu
+    rashey "enni scores oh enter chey"
+    theesko a
+.
+
+anuko b = 0
+anuko s = 0
+
+rashey "okasari oka value mathrame enter chey"
+
+okavela b < a ainappudu
+    theesko c
+    anuko s = s + c
+    anuko b = b + 1
+.
+
+rashey "average"
+rashey s / a
