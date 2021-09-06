@@ -6,10 +6,55 @@ This is a compiler implemented in C++ for a language I cooked up. You might find
 
 The idea crept into my otherwise beautiful mind, when I came across a paper that describes a Perl module - Lingua::Romana::Perligata, that allows one to write scripts in Latin. I know people call Latin a dead language, still, I learnt a couple of sentences like 'Sum domi dormit'. Beware, you might not realise what you are getting into. The words I used for as keywords come from my personal vocabulary. You may find this project wherever, whenever, however, but do not find it funny. This is as personal as my toothbrush.
 
+# TODO
+- [x] Lexer
+- [x] Parser
+- [x] C Emitter
+- [ ] Support for Arrays and Strings.
+- [ ] Support for functions/ methods.
+- [ ] Classes and Objects
+- [ ] REPL
    
 
+# Grammar
 
+Notation is as follows:
 
+```
+::= 	refers to the definition of a rule.
+|	logical OR
+()	grouping
+[]	zero or one repitition(s)
+{}	zero or more repitition(s)
++	one or more repitition(s)
+```
+
+Keywords and operators are enclosed in double quotations.
+
+```
+program     ::=		{statement}
+
+statement   ::=		"raayi" (expression | string) nl
+		|	"chudu" comparison "aithe" nl {statement} nl "." nl
+		|	"okavela" comparision "ainappudu" nl {statement} nl "." nl
+		|	"anuko" ident "=" expression nl
+		|	"theesko" ident nl
+
+comparison  ::=		expression (("==" | "!=" | ">" | ">=" | "<" | "<=") expression)+
+
+expression  ::=		term {( "-" | "+" ) term}
+
+term	    ::=		unary {( "/" | "*") unary}
+
+unary	    ::=		["+" | "-"] primary
+
+primary     ::=		number | ident
+
+nl	    ::=		'\n'+
+
+```
+
+			
 
 - [x] numerical variables
 - [x] basic arithmetic
