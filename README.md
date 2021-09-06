@@ -14,7 +14,16 @@ The idea crept into my otherwise beautiful mind, when I came across a paper that
 - [ ] Support for functions/ methods.
 - [ ] Classes and Objects
 - [ ] REPL
-   
+
+# Keywords and their English meanings
+
+- rashey	:	Write
+- chudu		:	See
+- aithe		:	If
+- okavela	:	In case
+- ainappudu	:	While true
+- anuko		:	Assume
+- theesko	:	Take
 
 # Grammar
 
@@ -53,45 +62,24 @@ primary     ::=		number | ident
 nl	    ::=		'\n'+
 
 ```
-
 			
+The concocted language currently supports the following:
+- Numbers that are floating point by default.
+- Basic arithmetic
+- chudu - aithe block which is analogous to a if block.
+- anuko, and theesko statements to define variables and read data from user.
+- okavela - ainappudu loop that closely resembles a while loop.
+- Printing text/ numbers using rashey.
+- Single line comments - anything preceded by "#".
+- Read only numbers as input.
 
-- [x] numerical variables
-- [x] basic arithmetic
-- [x] chudu - aithe statement
-- [x] anuko, theesko statements
-- [x] okavela - ainappudu loop
-- [x] text and numbers print cheyadam
-- [x] comments
-- [ ] expressions ki parantheses
-- [ ] logical operators
-- [ ] atlakakunda and lekapothe statements
-- [ ] bin, hex and octal numerics
-- [ ] compilation thappulu
-- [ ] panulu
-
-ee kinda unna command mana code ni c code ki compile chesthadi: 
-s
-```
-./amrika ../examples/hello.rc
-```
-out.c aney file lo mana code ki equivalent c code untadi. inka normal ga c code compile chesthey saripothadi.
-
-```
-g++ out.c && ./a.out
-```
+# NOTE
+- Strings must not contain either escape characters, or "%" unna. If present an unsupported character in string error is reported.
+- An identifier can only contain english alphabet. Unlike popular languages, an identifier can not contain an integer or an underscore. 
+- Do not forget to end chudu-aithe and okavela-ainappudu with a DOT in the next line.
+- All assignments must be preceded with "anuko".
+- The current grammar and production rules are not final. I will be making changes as I see fit.
 
 
-<h3>Mundhu idi chadavali:</h3>
-<ul> 
-<li>strings la escape characters unna, or "%" unna, unsupported character in string ani error osthadhi.
-<li>identifier la only english letters undali. numbers, symbols undodhu.
-<li>numbers integers use chesina, floating point use chesina, ikkada mathram floating point e theeskuntadi.
-<li>okavela ends with a dot in a new line. same line lo end kavali. grammar reframe cheyali. will work on that the next time.
-<li>assignment statements annitiki anuko prefix undalsindhe. idi kuda marchali. may be final statement ki specific ga marchali. will sit on this.
-<<<<<<< HEAD
-</ul>
-=======
-<li>syntax and grammar final kadhu. will make changes as I see fit.
-</ul>
->>>>>>> e1cb1409010ee0401e872da57b34b24679f91ba2
+<p><b>Go through <a href="">examples</a> to get an idea of how to start coding in this language.</b></p>
+
