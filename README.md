@@ -21,7 +21,7 @@ The idea crept into my otherwise beautiful mind, when I came across a paper that
 - chudu		:	See
 - aithe		:	If
 - okavela	:	In case
-- ainappudu	:	While true
+- ainappudu	:	While
 - anuko		:	Assume
 - theesko	:	Take
 
@@ -104,6 +104,6 @@ When you are done, run the following code to remove executables and files that a
 ./clean
 ```
 
-<b><p>Go through <a href="">examples</a> to get an idea of how to start coding in this language.</p>
+<b><p>Go through <a href="./examples/">examples</a> to get an idea of how to start coding in this language.</p>
 
 <p>Use at your own risk. I use WSL Ubuntu on Windows 10 for development. I am not responsible for any kind of mishaps that occur to your hardware/PC when using/running Amrika.<p><b> 
