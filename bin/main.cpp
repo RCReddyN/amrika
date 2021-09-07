@@ -6,7 +6,7 @@
 using namespace std;
 int main(int argc, char **argv){
     if(argc != 2){
-        cout << "code rasina file edhi? argument laga pass chey!";
+        cout << "code rasina file edhi? argument laga pass chey!" << endl;
         exit(0);
     }
     ifstream inputFile(argv[1]);
@@ -19,5 +19,4 @@ int main(int argc, char **argv){
     Parser parser(lexer, emitter);
 
     parser.program();
-    cout << "Compiling aipoindi" << endl;
 }

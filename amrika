@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo $(g++ bin/main.cpp bin/lex.cpp bin/emit.cpp bin/parse.cpp)
+echo $(./a.out $1)
