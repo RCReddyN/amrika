@@ -83,7 +83,7 @@ The concocted language currently supports the following:
 
 #Usage
 
-[*]Use make to generate the compiler.
+- Use "make" to generate the compiler.
 
 ```
 make
