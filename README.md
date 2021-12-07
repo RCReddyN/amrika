@@ -81,7 +81,7 @@ The concocted language currently supports the following:
 - The current grammar and production rules are not final. I will be making changes as I see fit.
 
 
-#Usage
+# Usage
 
 - Use "make" to generate the compiler.
 
