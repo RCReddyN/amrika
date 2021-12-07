@@ -88,22 +88,22 @@ The concocted language currently supports the following:
 ```
 make
 ```
-The command generates the compiler, a file with name "amrikac".
+- The command generates the compiler, a file with name "amrikac".
 
-[*]Run the following command to compile the ".rc" file where the code following above described grammar is written. This command generates an intermediary C code. Please note that the resultant C file has no extension.
+- Run the following command to compile the ".rc" file where the code following above described grammar is written. This command generates an intermediary C code. Please note that the resultant C file has no extension.
 
 ```
 ./amrikac examples/hello.rc
 ```
-[*]Use the existing "amrikarun" bash script to compile and run the generated C code.
+- Use the existing "amrikarun" bash script to compile and run the generated C code.
 
 ```
 ./amrikarun examples/hello
 ```
 
-You must see the output on the screen.
+- You must see the output on the screen.
 
-When you are done, run the following code to remove executables and files that are no longer necessary.
+- When you are done, run the following code to remove executables and files that are no longer necessary.
 ```
 make clean
 ```
