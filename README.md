@@ -83,25 +83,29 @@ The concocted language currently supports the following:
 
 #Usage
 
-Run the following from inside the directory.
-```
-./amrika ./examples/hello.rc
-```
-The above command takes in the file "hello.rc" and gives out an equivalent C code in the file named "out.c".
+[*]Use make to generate the compiler.
 
 ```
-g++ out.c && a.out
+make
 ```
-Then run the above command to compile and run the C code obtained.
+The command generates the compiler, a file with name "amrikac".
+
+[*]Run the following command to compile the ".rc" file where the code following above described grammar is written. This command generates an intermediary C code. Please note that the resultant C file has no extension.
+
+```
+./amrikac examples/hello.rc
+```
+[*]Use the existing "amrikarun" bash script to compile and run the generated C code.
+
+```
+./amrikarun examples/hello
+```
 
 You must see the output on the screen.
-<div align="center">
-	<img src="./support/hello.png">
-</div>
 
 When you are done, run the following code to remove executables and files that are no longer necessary.
 ```
-./clean
+make clean
 ```
 
 <b><p>Go through <a href="./examples/">examples</a> to get an idea of how to start coding in this language.</p>

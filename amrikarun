@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo -n $(gcc -x c $1)
+echo $(./a.out)

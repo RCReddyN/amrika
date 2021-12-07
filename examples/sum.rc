@@ -1,0 +1,14 @@
+theesko n
+
+anuko i = 0
+anuko s = 0
+anuko c = 1
+
+okavela i < n ainappudu
+	anuko s = s + c
+	anuko c = c + 1
+	anuko i = i + 1
+.
+
+rashey s 
+	
