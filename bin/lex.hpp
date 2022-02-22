@@ -1,7 +1,9 @@
-#include<iostream>
-#include<map>
+#include <iostream>
+#include <map>
 
-enum TokenType{
+enum TokenType
+{
+    // enum containing keywords and reserved tokens
     null,
     EOF_ = -1,
     NEWLINE = 0,
@@ -16,7 +18,7 @@ enum TokenType{
     ainappudu = 105,
     anuko = 106,
     chudu = 107,
-    
+
     EQ = 201,
     PLUS = 202,
     MINUS = 203,
@@ -24,53 +26,56 @@ enum TokenType{
     SLASH = 205,
     EQEQ = 206,
     NOTEQ = 207,
-    LT  = 208,
+    LT = 208,
     LTEQ = 209,
     GT = 210,
     GTEQ = 211,
-    DOT = 212 
+    DOT = 212
 };
 
 using namespace std;
 
-class Token{
-    public:
-        string tokenText;
-        TokenType tokenKind;
-        Token(){}
-        Token(string tText, TokenType tKind){
-            tokenText = tText;
-            tokenKind = tKind;
-        }
+class Token
+{
+public:
+    string tokenText;
+    TokenType tokenKind;
+    Token() {}
+    Token(string tText, TokenType tKind)
+    {
+        tokenText = tText;
+        tokenKind = tKind;
+    }
 };
 
-class Lexer{
-    public:
-        string source;
-        char curChar;
-        int curPos;
-        map<string, TokenType> keywords;
+class Lexer
+{
+public:
+    string source;
+    char curChar;
+    int curPos;
+    map<string, TokenType> keywords;
 
-        Lexer(){
-            
-        }
-        Lexer(string input);
+    Lexer()
+    {
+    }
+    Lexer(string input);
 
-        //process next character
-        void nextChar();
+    // process next character
+    void nextChar();
 
-        //return lookahead character
-        char peek();
+    // return lookahead character
+    char peek();
 
-        //print error message and exit
-        void abort(string message);
+    // print error message and exit
+    void abort(string message);
 
-        //skip whitespace except newlines
-        void skipWhiteSpace();
+    // skip whitespace except newlines
+    void skipWhiteSpace();
 
-        //skip comments in the code
-        void skipComment();
+    // skip comments in the code
+    void skipComment();
 
-        //return the next token
-        Token getToken();
+    // return the next token
+    Token getToken();
 };
